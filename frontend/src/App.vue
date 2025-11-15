@@ -1,11 +1,18 @@
-<script setup></script>
-
+<!-- frontend/src/App.vue -->
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app" class="app-root">
+    <MainHeader />
+
+    <main class="main-content">
+      <RouterView />
+    </main>
+
+    <MainFooter />
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { RouterView } from 'vue-router'
+import MainHeader from './components/layout/MainHeader.vue'
+import MainFooter from './components/layout/MainFooter.vue'
+</script>

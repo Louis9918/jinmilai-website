@@ -1,0 +1,671 @@
+/* 重置与基础样式 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: "SimSun", "宋体", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  color: #222222;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 主题变量 */
+:root {
+  --color-primary: #f37021;
+  --color-text: #222222;
+  --color-bg: #ffffff;
+  --color-border-light: #eeeeee;
+  --header-height-mobile: 96px;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 容器：宽度限制 + 两侧留白 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ========= 头部导航 ========= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+/* 桌面端：一行布局，不允许换行 */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  flex-wrap: nowrap; /* 不换行，logo+文字+导航保持一行 */
+}
+
+/* LOGO：图在左、文字在右 */
+.logo {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0; /* 不被压缩 */
+}
+
+/* 桌面端 logo 尺寸 */
+.logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+}
+
+/* logo 文字区域 */
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 中中文 & 英文都强制单行显示，不换行 */
+.logo-text-cn,
+.logo-text-en {
+  white-space: nowrap;
+}
+
+.logo-text-cn {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary);
+  line-height: 1.3;
+}
+
+.logo-text-en {
+  font-size: 13px;
+  color: #666666;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
+/* 导航：桌面一行显示（默认间距略缩小） */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;         /* 之前是 32，整体略收紧一点 */
+  flex-shrink: 0;    /* 不允许因为空间不足而被挤断行 */
+}
+
+.nav-link {
+  font-size: 17px;
+  padding: 8px 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.2s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.router-link-active::after {
+  width: 100%;
+}
+
+/* 右侧：语言 + 菜单按钮（桌面隐藏按钮） */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.lang-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 15px;
+}
+
+.lang-btn--active {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.lang-divider {
+  margin: 0 4px;
+  color: #999999;
+}
+
+/* 汉堡菜单按钮：桌面端隐藏，移动端显示 */
+.menu-btn {
+  display: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* ========= 主体 & 页脚 ========= */
+
+.main-content {
+  flex: 1;
+  padding: 28px 0 44px;
+}
+
+.site-footer {
+  border-top: 1px solid var(--color-border-light);
+  background-color: #fafafa;
+  padding: 16px 0;
+  font-size: 12px;
+  color: #555555;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-brand {
+  font-size: 13px;
+}
+
+.footer-title {
+  font-weight: 600;
+}
+
+.footer-subtitle {
+  font-size: 12px;
+  color: #777777;
+}
+
+.footer-contact div {
+  line-height: 1.6;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.footer-separator {
+  color: #999999;
+}
+
+/* ========= 页面通用样式 ========= */
+
+.page {
+  padding: 16px 0;
+}
+
+.page-title {
+  font-size: 24px;
+  margin: 0 0 12px;
+  color: var(--color-primary);
+}
+
+.page-tip {
+  font-size: 15px;
+  color: #666666;
+}
+
+/* ========= 首页 HERO 与数字卡片 ========= */
+
+.hero {
+  padding: 24px 0 24px;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 34px;
+  margin: 0 0 12px;
+  color: var(--color-primary);
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  margin: 0 0 22px;
+  color: #444444;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  border: 1px solid var(--color-primary);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-outline {
+  background-color: #ffffff;
+  color: var(--color-primary);
+}
+
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.stat-card {
+  border-radius: 10px;
+  border: 1px solid var(--color-border-light);
+  padding: 14px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #666666;
+}
+
+/* ========= 联系我们简单布局 ========= */
+
+.contact-info {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.contact-form-placeholder {
+  margin-top: 16px;
+  font-size: 13px;
+  color: #888888;
+}
+
+/* ========= 中等屏幕：进一步收紧导航间距 ========= */
+/* 只作用在 1024px ~ 1200px 这一段窄桌面，防止间距显得太大 */
+
+@media (max-width: 1200px) {
+  .header-nav {
+    gap: 22px;              /* 中等宽度时再收紧一点 */
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .lang-switch {
+    font-size: 14px;
+  }
+
+  .lang-btn {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+}
+
+/* ========= 大屏 → 手机模式的切换点 ========= */
+/* 当宽度不足以容纳 logo+文字+导航 一行时（< 1080px），直接切手机模式 */
+
+@media (max-width: 1080px) {
+  .header-inner {
+    align-items: center;
+  }
+
+  /* mobile 模式：导航改为下拉菜单，默认隐藏 */
+  .header-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 12px 16px 16px;
+    display: none;
+  }
+
+  .header-nav--open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 8px 0;
+    font-size: 16px;
+  }
+
+  /* 显示汉堡按钮，隐藏“桌面式”导航的横向撑行效果 */
+  .menu-btn {
+    display: inline-flex;
+  }
+}
+
+/* ========= 手机端（更窄）进一步精简 ========= */
+
+@media (max-width: 768px) {
+  .header-inner {
+    min-height: var(--header-height-mobile);
+  }
+
+  .logo-img {
+    height: 64px;
+  }
+
+  .logo-text-cn {
+    font-size: 16px;
+  }
+
+  /* 手机隐藏英文公司名，避免过宽 */
+  .logo-text-en {
+    display: none;
+  }
+
+  .main-content {
+    padding: 20px 0 28px;
+  }
+
+  .home-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    text-align: left;
+    padding-top: 20px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .footer-inner {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+}
+
+/* ========= 高级版 Hero 与卡片风格 ========= */
+
+.hero-banner {
+  margin-top: 18px;
+  border-radius: 20px;
+  padding: 22px 22px 24px;
+  background: radial-gradient(120% 200% at 0% 0%, #ffe4c9 0%, #fff9f3 40%, #ffffff 100%);
+  border: 1px solid rgba(243, 112, 33, 0.25);
+  box-shadow: 0 16px 40px rgba(243, 112, 33, 0.15);
+}
+
+.hero-grid {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.hero-copy {
+  flex: 1.1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(243, 112, 33, 0.08);
+  border: 1px solid rgba(243, 112, 33, 0.2);
+  color: #b3470e;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+/* 覆盖原有 hero 标题字号，让它更有“海报感” */
+.hero-title {
+  font-size: 32px;
+  margin: 0 0 10px;
+  color: #d44c00;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  margin: 0 0 18px;
+  color: #703616;
+}
+
+/* 右侧轮播区域 */
+.hero-slider {
+  flex: 1;
+  min-width: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+  isolation: isolate;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-slide--active {
+  opacity: 1;
+}
+
+.hero-slide-content {
+  padding: 14px 16px 16px;
+  color: #ffffff;
+}
+
+.hero-slide-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.hero-slide-title {
+  font-size: 16px;
+  margin: 0 0 4px;
+}
+
+.hero-slide-desc {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* 轮播指示点 */
+.hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.hero-dot--active {
+  width: 18px;
+  background: #ffffff;
+}
+
+/* 通用卡片样式 */
+.section-card {
+  border-radius: 18px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+  padding: 18px 18px 20px;
+  margin-top: 18px;
+}
+
+.section-card--soft {
+  background: linear-gradient(135deg, #fff9f3, #ffffff);
+}
+
+.section-card--accent-border {
+  border-color: rgba(243, 112, 33, 0.3);
+}
+
+/* 统计卡片容器 */
+.home-stats-card {
+  margin-top: 18px;
+}
+
+/* 覆盖 home-stats，让排版更现代一点 */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  border-radius: 14px;
+  border: none;
+  background: radial-gradient(120% 140% at 0% 0%, #fff2e7 0%, #ffffff 30%, #ffffff 100%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* 响应式调整：大屏 → 小屏 */
+@media (max-width: 900px) {
+  .hero-grid {
+    flex-direction: column;
+  }
+
+  .hero-slider {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-banner {
+    margin-top: 12px;
+    padding: 18px 16px 20px;
+    border-radius: 16px;
+  }
+
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .home-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
