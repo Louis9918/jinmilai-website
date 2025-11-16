@@ -426,7 +426,7 @@ img {
   }
 
   .logo-text-cn {
-    font-size: 16px;
+    display: none;
   }
 
   /* 手机隐藏英文公司名，避免过宽 */

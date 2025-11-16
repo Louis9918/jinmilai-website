@@ -130,7 +130,7 @@ import { useRoute } from 'vue-router'
 
 import heroPlant from '@/assets/hero-plant.jpg'
 import heroLab from '@/assets/hero-lab.jpg'
-import heroLogistics from '@/assets/hero-logistics.jpg'
+import heroLogistics from '@/assets/hero-plant.jpg'
 
 const route = useRoute()
 
